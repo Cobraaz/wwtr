@@ -1,0 +1,12 @@
+.row-per-page > * {
+  margin-right: 10px;
+}
+.Ab-admin {
+  padding-top: 130px;
+}
+
+.checkbox-design {
+  -webkit-appearance: checkbox !important; /* Chrome, Safari, Opera */
+  -moz-appearance: checkbox !important; /* Firefox */
+  -ms-appearance: checkbox !important; /* not currently supported */
+}

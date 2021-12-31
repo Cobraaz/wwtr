@@ -1,0 +1,785 @@
+
+/*RESPONSIVE CSS START HERE
+---------------------------*/
+/*MIN WIDTH MEDIA*/
+@media (min-width: 1920px){
+    body{
+        font-size: 20px!important;
+    }
+    .landing-banner-wrap {
+        width:100%;
+        min-height:1069px;
+    }
+    .landing-banner-wrap::before {
+        height: 1069px;
+    }
+    .landing-banner-wrap::after{
+        background-size: 100%;
+    }
+}
+@media (min-width: 1400px){
+    
+}
+@media (min-width: 992px){
+    .shadow-sm{
+        box-shadow: none!important;
+    }
+    .mt-6{
+       margin-top: 2.5rem !important;
+    }
+    .my-6{
+       margin-top:2.5rem !important;
+       margin-bottom:2.5rem !important;
+    }
+    .px-6{
+       padding-left:2.5rem !important;
+       padding-right:2.5rem !important;
+    }
+    .modal-dialog {
+        max-width: 1100px;
+        margin: 1.75rem auto;
+        border-radius: 0;
+    }
+   
+}
+@media (min-width: 768px) {
+  .py-md-6{
+        padding-top: 2.5rem !important;
+        padding-bottom: 2.5rem !important;  
+    }
+    /*.carousel-control-prev {
+        left: -80px;
+    }*/
+    .banner-2 .carousel-control-prev, 
+    .banner-2 .carousel-control-next{
+        margin-top: -9em;
+    }
+    .brdr-md-2{
+        border-right: 2px solid #0099d8;
+    }
+}
+
+/*MAX WIDTH MEDIA*/
+@media (max-width: 1189px) {
+
+    .landing-page{
+        background-size: cover;
+    }
+
+}
+@media (max-width: 1024px) {
+    .center-content,
+    .carousel-caption,
+    .carousel-caption-custom,
+    .center-content_2{
+        max-width: 100%;
+        padding: 0 15px;
+        flex: 0 0 100%;
+    }
+     .carousel-caption,
+    .carousel-caption-custom{
+         padding: 0 10%;
+         padding-right: 0!important;
+    }
+    .titleParaOrder .large-text{
+        font-size: 9.43rem;
+    }
+    .titleParaOrder .large-text {
+        left: -118px;
+        font-size: 9.43rem;
+        line-height: 107px;
+        min-width: 118px;
+        min-height: 118px;
+    }
+    .titleParaOrder {
+        min-height: 118px;
+    }
+    .px-half{
+        padding-left:8px!important;
+        padding-right:8px!important;
+    }
+    .mainmenu .dropdown-menu li a{
+        line-height: 1.8;
+        padding-top: .5rem;
+        padding-bottom: .5rem;
+    }
+    #parallax-file,
+    #anim1_js{
+       display: none;
+    }
+    .ourMission .blue-bg{
+        min-height: 138px;
+    }
+}
+@media (max-width: 990px) {
+   header.top-hdr {
+    position: fixed;
+    top:0;
+    left: 0;
+    width: 100%;
+    height: auto;
+    z-index: 999;
+    background: #fff;
+}
+    .abs-sm-pos{
+        top: inherit;
+        left: inherit;
+    }
+    .mainmenu .navbar-collapse{
+        position: relative;
+    }
+    
+    .mobile-menu .mobile-head::before{
+        position: absolute;
+        content: "";
+        width: 100%;
+        left:0;
+        bottom:0;
+        border-top: 3px solid #0095d8!important;
+ 
+    }
+    .w-md-100{
+      width: 100%!important;  
+    }
+    .mainmenu ul.nav > li a{
+        border-bottom:1px solid #0095d8;
+        font-weight: 600;
+    }
+    .logo {
+        max-width: 182PX;
+        height:auto;
+    }
+    .navbar-toggler{
+        min-height: 60px;
+       /* background: #f1f1f1;*/
+        
+    }
+    .mainmenu .header-tp-rw a {
+        display: block!important;
+    }
+    .contackUs{
+        width: 124px;
+        margin: 0 auto;
+    }
+    body{
+        font-size:14px;
+    }
+    .btn-custom-lg{
+        min-height: auto;
+    }
+    .seebenifitsec .xl-text,
+    .seebenifitsec h2.xl-text{
+        font-size:1.3rem!important;
+        font-weight: normal;
+    }
+    .titleParaOrder {
+        min-height: 76px;
+    }
+    p.br-md-none > br,
+    a.br-md-none > br,
+    div.br-md-none > br{
+        display: none;
+    }
+    .mt-6{
+       margin-top: 2.1rem !important;
+    }
+    .my-6{
+       margin-top:2.1rem !important;
+       margin-bottom:2.1rem !important;
+    }
+    .pt-6{
+       padding-top: 2.1rem !important;
+    }
+    .pb-6{
+       padding-bottom:2.1rem !important;
+    }
+    .py-6{
+       padding-top:2.1rem !important;
+       padding-bottom:2.1rem !important;
+    }
+    .px-6{
+       padding-left:2.1rem !important;
+       padding-right:2.1rem !important;
+    }
+    .parallax-window {
+        min-height:inherit;
+    }
+   /*.mainmenu ul.nav > li >a.dropdown-toggle{
+        background: url(../images/down-arrow-menu.png) no-repeat 100% center/25px 16px;
+    }*/
+    #header.new-header .header-tp-rw.abs-sm-pos {
+        height:auto;
+        visibility:visible;
+        transition: all .5s ease;
+        -webkit-transition: all .5s ease;
+    }
+    .br-md-none br{
+        display: none;
+    }
+    .f-medium-1 {
+        font-size: 1.7875rem;
+    }
+    .default-list li {
+        font-size: 1rem;
+    }
+    .f-medium-2 {
+        font-size: 1.2625rem;
+    }
+    h3.section-title {
+        font-size: 1.8em;
+    }
+    .ourMission .blue-bg{
+        min-height: 120px;
+    }
+}
+@media only screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:portrait) {
+   .exam-equipment ul li {
+        padding-left: .5em!important;
+    }
+}
+
+@media (max-width:812px) {
+    .mobile-head{
+        background-color: #333;
+    }
+    .landing-banner-content{
+        max-width: 43%;
+        height: 100%;
+        position: relative;
+    }
+ .mobile-menu .header-nav {
+    overflow-y: auto;
+    height: 100vh;
+}  
+  .mainmenu ul.nav > li:hover > a::after, .mainmenu ul.nav > li.active > a::after, .mainmenu ul.nav > li.dropdown:hover > a::after, .footer-menu ul.nav > li:hover > a::after, .footer-menu ul.nav > li.dropdown:hover > a::after{
+      display: none!important;
+      background: none;
+    }
+    .mainmenu .dropdown-submenu, .footer-menu .dropdown-submenu{
+        padding: 0!important;
+    }
+    #anim1_js,
+    #anim_1,
+    #anim_2{
+      display:none!important
+    }
+    .navbar-toggler {
+        margin-right: -11px;
+    }
+ .mainmenu ul.nav > li .dropdown-submenu > li a {
+   padding-top: .5rem!important;
+   padding-bottom: .5rem!important;
+    } 
+    .mainmenu ul.nav > li a {
+   padding-top: .9rem!important;
+   padding-bottom: .9rem!important;
+        color: #76777c;
+    }
+.mainmenu ul.nav > li {
+    font-size: 1.2em;
+}
+    #header.open .mobile-head, #header.open .nav.navbar-nav {
+        margin-top:0!important;
+    }
+    .nav-tabs .nav-link{
+        min-width: 228px;
+    }
+}
+
+
+@media (max-width: 768px) {
+    .abs-sm-pos{
+        position:static;
+    }
+    .carousel-indicators li{
+        width: 10px;
+        height: 10px;  
+    }
+    
+   .banner-titile {
+        font-size: 1.6em;
+    }
+    h1, .h1 {
+        font-size: 1.5rem;
+    }
+    h2, .h2 {
+        font-size: 1.3rem
+    }
+    .mobile_marginT {
+        margin-top: -91px;
+    }      
+}
+@media (max-width: 767px) {
+    
+    .px-6.px-6-0{
+        padding-left:0!important;
+        padding-right:0!important;
+    }
+    .mainmenu .dropdown-submenu ,
+    .footer-menu  .dropdown-submenu {
+        top: 98%;
+    }
+
+  
+  
+    p, sm,
+    .patient-profile p{
+        font-size: 1rem;
+        font-weight: 500;
+    }
+    .nav-tabs .nav-link{
+        min-width:auto; 
+    }
+   
+    .nav-tabs .nav-link {
+        min-width: auto;
+        padding-left: 2em!important;
+        padding-right: 2em!important;
+    }
+   
+    .br-sm-none br{
+       display: none;
+    }
+    .f-medium-1 {
+        font-size: 1.3rem;
+    }
+    .f-medium-2 {
+        font-size:1rem;
+    }
+    .f-medium-2.sm-2xlarge-text,
+    .sm-2xlarge-text{
+       font-size:2.1rem; 
+    }
+    .brder-before.brder-before-sm-none::before{
+        display: none;
+    }
+    .m-height {
+         min-height:auto!important; 
+    }
+    .f-large-1 {
+        font-size: 1.5rem;
+    }
+   
+    .b-none{
+        border-bottom: 0;
+    }
+
+    .f-medium-1.f-medium-1-mob {
+        font-size: 1.4rem;
+    }
+    .f-medium-2.f-medium-2-mob,
+    .tabhead .f-medium-2.f-medium-2-mob {
+        font-size: 1.8rem;
+    }
+    .tab-style-mob.nav-tabs .nav-link {
+        font-size: 1.2rem;
+    }
+    .tab-content-mob.tab-content {
+        border: 2px solid #0099d8;
+        border-width: 0;      
+    }
+    .mx-mob-0{
+        margin:0!important;
+    }
+    .tab-selectCase-mob figure + p{
+        padding-left:15px; 
+        padding-right:15px; 
+        margin-bottom: 0;
+    }
+    .carousel-caption, 
+    .carousel-caption-custom{
+        bottom: 20px; 
+    }
+    .contactForm h1 {
+        font-size: 2.6875rem;
+    }
+    .testim-block {
+        border-bottom: 2px solid #007ac3;
+        padding-bottom: 2em!important;
+        margin-bottom:0!important;
+        padding-top: 0!important;
+    }
+    .testimonial-wrap > .row{
+        margin-bottom: 2em!important;
+    }
+    .center-content.testimonial-wrap{
+        margin-bottom: 0!important;
+        padding-bottom: .5em!important;
+    }
+   .testim-block figure {
+        padding-top: .6em;
+    }
+    .superiorPatient figure {
+        min-height: 170px;
+    }
+    .banner-2 .carousel-indicators li {
+        font-size: 1.5rem;
+    }
+    .banner-2 .carousel-caption, .banner-2 .carousel-caption-custom {
+        position: static;
+    }
+    h3.section-title {
+        font-size:1.5em;
+    }
+    .banner-2 .carousel-control-prev-icon {
+        background-position:-7px 0;
+        background-size: 80px 38px;
+            height: 38px;
+    }
+    .banner-2 .carousel-control-next-icon {
+        background-size: 80px 38px;
+        background-position: -40px 0;
+            height: 38px;
+    }
+    .default-list li{
+        font-size: 1rem;
+    }
+    .banner-2 .carousel-control-prev, 
+    .banner-2 .carousel-control-next{
+        height: 50%;
+    }
+    .carousel-caption-inner{
+        top: 65%;
+        left:0;
+    }
+    .carousel-caption-inner{
+        transform:none!important;
+        bottom: 0;
+        top:inherit;
+    }
+	
+	.gray-larg-btn i {
+		left: 14px;
+	}
+    .banner-2 .carousel-control-prev {
+        left: 22px;
+    }
+     .f-medium-1.f-medium-1-sm{
+         font-size: 1.5rem;
+    }
+    .faqTab .card-header {
+        padding: .5em 1.25em;
+        position: relative;
+    }
+    .faqTab .card-header i {
+        position: absolute;
+        top: 50%;
+        right:20px;
+        margin-top: -10px;
+        
+        
+    }
+    .faqTab .card-body{
+        padding:0; 
+    }
+    .text-sm-center{
+        text-align:center;
+    }
+    .blogPost .date-title {
+        font-size: 1.1rem;
+    }
+    .blogPost .f-medium-2.sm-large-text{
+        font-size: 1.3rem;
+    }
+        .titleParaOrder .large-text.r-position-less {
+        left: -57px;
+        min-width: 57px;
+    }
+
+}
+@media (max-width: 666px) {
+    .bl-sm-none{
+        border-left:none!important;
+    }
+    .br-sm-none{
+        border-right:none!important;
+    }
+    p.br-none > br,
+    a.br-none > br,
+    div.br-none > br{
+        display: none;
+    }
+    .carousel-control-prev, .carousel-control-next {
+        width: 15%!important;
+    }
+    .carousel-caption,
+    .carousel-caption-custom {
+        padding: 0 20px;
+        padding-right: 0;
+    }
+    .banner-2 .carousel-caption, .banner-2 .carousel-caption-custom{
+        position: static;
+    }
+    .banner-titile {
+        font-size: 1.4rem;
+    }
+  /* .carousel-control-prev-icon, .carousel-control-next-icon {
+        width: 35px;
+        height: 34px;
+        background: #333;
+        background: url(../images/banner-arrow.png) no-repeat 0px center/70px 33px;
+        margin-top: -41px;
+    }*/
+    .carousel-control-next-icon {
+        background-position: -35px 0;
+    }
+    .pb-5, .py-5 {
+        padding-bottom: 2.2rem !important;
+    }
+    .pt-5, .py-5 {
+        padding-top: 2.2rem !important;
+    }
+    .r-position-less::after {
+        right: 0px!important;
+    }
+    .mobile-menu .header-nav {
+        overflow-y: auto;
+        height: 100vh;
+    }
+    .opreater_icon::before, .opreater_icon::after {
+    margin-top: -70px;
+        
+    }
+    .ftr-bottom .shaprateSmallLine.shaprateLine > li{
+        font-size: 1.2rem;
+        line-height: .9;
+    }
+    .footer-wrapper .ftr-bottom .socialIcon ul li {
+        font-size: 1rem;
+    }
+    .footer-wrapper .ftr-bottom .socialIcon ul li strong {
+        font-weight: 500;
+    }
+    .ftr-bottom .shaprateSmallLine.shaprateLine > li a {
+        vertical-align: top;
+        line-height: 1.1;
+    }
+    .mt-6 {
+        margin-top: 1.8rem !important;
+    }
+    .b-btm-sm-blue{
+        border-bottom:3px solid #0057a4;
+    }
+    .b-top-sm-blue{
+        border-top:3px solid #0057a4;
+    }
+    .gray-larg-btn {
+        background-color: #d9e6f1;
+        font-size: 1.36em;
+    }
+    .caseTab li i{
+        background-size:74%!important;
+        width: 75px;
+        height: 50px;
+    }
+    .caseTab p,
+    .tabhead{
+        margin-bottom: 0;
+        font-size: 1.2em;
+    }
+    .tabhead{
+        font-size: 1em;
+        font-weight: 600;
+    }
+   .tabhead_2 {
+        font-size: 1.3rem;
+        font-weight: 600;
+        min-height: auto!important;
+        padding: .6rem 0!important;
+        line-height: 1.3;
+    }
+    .revenueBlock .f-medium-2 {
+        font-size: 1em;
+    }
+    .total-profit {
+        min-width: 100%;
+        line-height: 1.5625;
+    }
+    .numberBlock {
+        width: 18%;
+    }
+    .line-height-08{
+        line-height:1.2!important; 
+    }
+
+
+}
+   
+@media (max-width:430px) {
+    .GaugeMeter SPAN, .GaugeMeter B{
+        height:150px;
+    }
+    .GaugeMeter, .GaugeMeter canvas {
+        width: 100px!important;
+        height: 100px!important;
+        border-radius: 100%;
+    }
+    .GaugeMeter {
+        font-size: .9em;
+    }
+    .GaugeMeter SPAN{
+        line-height: 100px!important;
+        font-size: 30px;
+        height: 115px!important; 
+    }
+    .GaugeMeter span s, .GaugeMeter span u {
+        font-size: 1rem;
+    }
+     .GaugeMeter#exam-day span > s::after {
+        top: -5px;
+        left: -36px;
+        width: 100px;
+        height: 30px;
+        line-height: 0;
+        font-size: .8rem;
+    
+    }
+    .GaugeMeter SPAN, .GaugeMeter B {
+        height: 78px;
+        line-height: 100px!important;
+    }
+    .GaugeMeter b {
+        font-size: .7rem!important;
+    }
+    .GaugeMeter#exam-day span,
+    .GaugeMeter#exam-day b {
+        top: 55%;
+    }
+    
+    .GaugeMeter.GaugeMeterCustom, .GaugeMeter.GaugeMeterCustom canvas {
+        width: 192px!important;
+        height: 192px!important;
+        border-radius: 100%;
+        margin: 0 auto;
+    }
+    
+    
+    .revenue-block sm, 
+    .revenue-block p, 
+    .revenue-block div {
+        font-weight: bold;
+        font-size: 1em;
+    }
+    strong {
+        font-weight: 700;
+    }
+    .my-6 {
+        margin-top: 1.8rem !important;
+        margin-bottom: 1.8rem !important;
+    }
+    .nav-tabs .nav-link {
+        min-width: auto;
+        padding-left:.9em!important;
+        padding-right:.9em!important;
+    }
+    .caseTab li img {
+        width: 78%;
+        margin-bottom: 8px;
+    }
+    .tabhead {
+        min-height: 50px;
+    }
+    .active.tabhead.light-gray-bg {
+        font-size: 1.6em;
+        background: #0099d8!important;
+        padding-top: 10px!important;
+    }
+    .caseTab p br {
+        display: none;
+    }
+     .f-medium-1 {
+        font-size: 1rem;
+    }
+    .f-medium-1.f-medium-1-sm{
+         font-size: 1.3rem;
+    }
+    .f-medium-2 {
+        font-size:.8rem;
+    }
+    .f-medium-2.sm-large-text,
+    .sm-large-text{
+        font-size: 1rem;
+    }
+    .f-medium-2.sm-xl-text,
+    .sm-xl-text{
+        font-size: 1.25rem;
+    }
+    flex-row flex-item {
+        font-size: .8rem;
+        font-weight: 500;
+    }
+   .custom-grid flex-item:first-child {
+        padding-left: .4rem!important;
+        padding-right: .3rem!important;
+    }
+    .modal-dialog {
+        margin: 1rem;
+        pointer-events: none;
+    }
+    .check{
+        font-size: .9rem;
+    }
+    .checkmark {
+        top: -5px;
+    }
+     .numberBlock {
+        width: 14%;
+    }
+   .testim-block figure img {
+       width: 22%!important;
+    }
+    .superiorPatient figure {
+        min-height: 160px;
+        position: relative;
+    }  
+    .superiorPatient figure img {
+        position: absolute;
+        top: 50%;
+        width: 68%!important;
+        left: 0;
+        right: 0;
+        margin: 0 auto;
+        transform: translateY(-50%);
+        -webkit-transform: translateY(-50%);
+    }
+    .banner-2 .carousel-control-prev, 
+    .banner-2 .carousel-control-next {
+        width: 15%!important;
+        height:220px;
+    }
+    .banner-2 .carousel-control-prev-icon, 
+    .banner-2 .carousel-control-next-icon{
+         margin-top:0; 
+    }
+    .carousel-caption-inner{
+       /* top: 65%;*/
+        left:0;
+    }
+     .banner-2 .carousel-control-prev {
+        left:0;
+    }
+    .faqTab .card-header {
+        min-height: 61px;
+    }
+      .f-medium-2.sm-2xlarge-text,
+        .sm-2xlarge-text{
+           font-size:1.4rem; 
+        }
+	.ourMission .blue-bg {
+		min-height: 98px;
+	}
+	.titleParaOrder .large-text.r-position-less {
+        left: -57px;
+        min-width: 57px;
+    	}
+    .avatar {
+        width: 65px;
+        height: 65px;
+    }
+    .post-body {
+        width: calc(100% - 65px);
+    }
+    .children-post .post-body {
+        width: calc(100% - 81px);
+    }
+}

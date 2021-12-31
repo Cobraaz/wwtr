@@ -1,0 +1,26 @@
+.AB-modal-header {
+  color: #2e384d;
+  font-weight: bold;
+}
+.AB-modal-body {
+  color: #8d9797;
+  font-weight: bold;
+}
+
+.AB-dropdown {
+  background-color: #f9faff;
+  font-weight: 550;
+  color: #2e384d;
+  border: 1px solid #e0e7ff;
+  border-radius: 4px;
+}
+
+.AB-dropdown-toggle {
+  color: #2e384d;
+}
+.AB-dropdown-item {
+  color: #8d9797;
+  font-weight: bold;
+  letter-spacing: 0.8px;
+  font-size: 18px;
+}

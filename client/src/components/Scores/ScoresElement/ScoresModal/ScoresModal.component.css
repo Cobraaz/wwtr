@@ -1,0 +1,50 @@
+.AB-select-parent-score {
+  position: absolute;
+  z-index: 5;
+  width: 700px;
+  background: #fff;
+  border: 1px solid #03a9f4;
+  font-size: 12px;
+  /* right: 10%; */
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12),
+    0 3px 1px -2px rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+  padding: 5px;
+  margin: 0 auto;
+  display: block;
+  margin: auto !important;
+  cursor: default;
+}
+
+.AB-select-score {
+  border: 1px solid #e0e7ff;
+  width: 25%;
+  text-align: center;
+  border-radius: 10px;
+  font-size: small;
+  font-weight: 500;
+  color: #d3d3d3;
+  transition: 1s;
+}
+.AB-select-score > * {
+  cursor: pointer;
+}
+
+.AB-select-score:hover {
+  background-color: #03a9f4;
+}
+.AB-select-score:hover > button {
+  background-color: #fff;
+  color: #212529;
+}
+.AB-select-score:hover > label {
+  color: #fff !important;
+}
+
+.AB-select-score-button {
+  background-color: #03a9f4;
+  border: none;
+  width: 25%;
+  transition: 1s;
+  color: #fff;
+}

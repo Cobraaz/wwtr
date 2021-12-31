@@ -1,0 +1,97 @@
+.AB-parameters {
+  padding-top: 110px !important;
+}
+
+.AB-button-parent {
+  /* background-color: #ddd; */
+  padding: 10px;
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.AB-button {
+  /* background-color: #03a9f4; */
+  font-weight: 600;
+  display: block;
+  margin: 10px 0;
+  padding: 10px;
+  text-align: left;
+  width: 100% !important;
+  height: 3rem;
+  color: #03a9f4;
+  border: 1px solid #898989;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.AB-button:hover {
+  background-color: #03a9f4;
+
+  color: white;
+}
+
+.AB-button-selected {
+  background-color: #03a9f4;
+  border: 1px solid #03a9f4;
+  transition: 1s;
+  color: white;
+}
+
+.AB-container {
+  background-color: white;
+  padding: 10px;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.AB-warning-div {
+  position: absolute;
+  z-index: 8;
+  width: 400px;
+
+  background: #fff;
+  border: 1px solid #03a9f4;
+  font-size: 12px;
+  left: -25rem;
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12),
+    0 3px 1px -2px rgba(0, 0, 0, 0.2);
+  /* bottom: -40rem; */
+  /* transition: all 0.8s cubic-bezier(0.22, 0.67, 0.43, 1.22) 0.2s; */
+  border-radius: 10px;
+  padding: 5px;
+}
+
+hr {
+  border-top: 2px dashed #03a9f4;
+}
+
+.AB-submit-button {
+  background-color: #03a9f4;
+  font-weight: bold;
+  color: whitesmoke;
+  outline: none;
+  border: none;
+}
+
+#AB-navbar {
+  width: 100%;
+  /* top: 50px; */
+  background-color: white !important;
+}
+.sticky {
+  position: fixed;
+  top: 0px;
+  z-index: 8;
+  padding-top: 50px;
+  padding-bottom: 30px;
+  background-color: white;
+  color: white;
+  width: 80% !important;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.AB-parameters-data {
+  top: 800px !important;
+}
