@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
 import { setNotify } from "store/slices/notifySlice";
 import { addOptionName } from "store/slices/paramWeightagesSlice";
 import SelectOptionModal from "./SelectOptionModal";
@@ -7,8 +8,8 @@ import SelectOptionModal from "./SelectOptionModal";
 const ModalWeightages = ({
   showSelectOptionModal,
   toggleSelectOptionModal,
-  history,
-  optionName,
+  // optionName,
+  // parameters,
 }) => {
   const initialState = {
     optionOne: "",
@@ -16,10 +17,15 @@ const ModalWeightages = ({
     optionThree: "",
     optionFour: "",
   };
+  const { parameters, optionName } = useSelector(
+    (state) => state.paramsWeightages
+  );
   const [noOfOptions] = useState([1, 2, 3, 4]);
   const [setOption, setSetOption] = useState([]);
   const [initialName, setInitialName] = useState(initialState);
   const dispatch = useDispatch();
+  const history = useHistory();
+
   const selectNoOfOptions = (option) => {
     setSetOption(Array.from(Array(option).keys()));
   };
@@ -57,19 +63,21 @@ const ModalWeightages = ({
         setNotify({ error: "No duplicates option name are allowed" })
       );
     }
-    dispatch(addOptionName({ name, history }));
+    dispatch(addOptionName({ name, parameters, history }));
   };
   return (
     <>
-      <SelectOptionModal
-        setOption={setOption}
-        noOfOptions={noOfOptions}
-        selectNoOfOptions={selectNoOfOptions}
-        showSelectOptionModal={showSelectOptionModal}
-        toggleSelectOptionModal={toggleSelectOptionModal}
-        handleSubmit={handleSubmit}
-        initialName={initialName}
-      />
+      {showSelectOptionModal && (
+        <SelectOptionModal
+          setOption={setOption}
+          noOfOptions={noOfOptions}
+          selectNoOfOptions={selectNoOfOptions}
+          showSelectOptionModal={showSelectOptionModal}
+          toggleSelectOptionModal={toggleSelectOptionModal}
+          handleSubmit={handleSubmit}
+          initialName={initialName}
+        />
+      )}
     </>
   );
 };

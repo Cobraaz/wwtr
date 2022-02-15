@@ -9,7 +9,7 @@ import { loadUser } from "store/slices/authSlice";
 
 import "./App.css";
 
-import Home from "./components/Home";
+import Home from "pages/Home";
 import Layout from "./components/layout/Layout";
 
 import Routes from "./components/Routing/Routes";

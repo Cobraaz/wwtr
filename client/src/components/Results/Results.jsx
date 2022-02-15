@@ -1,20 +1,17 @@
 import ModalParamsWeightage from "components/Shared/ModalParamsWeightage";
 import ProgressBar from "components/Shared/ProgressBar";
 import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { getParameters } from "store/slices/paramWeightagesSlice";
 import { v4 } from "uuid";
-import DetailedGraphical from "./Graphical/Detailed";
-import DetailedNumerical from "./Numerical/Detailed";
-import OverallNumerical from "./Numerical/Overall";
+import DetailedGraphical from "./Graphical/Detailed/DetailedGraphical";
+import DetailedNumerical from "./Numerical/Detailed/DetailedNumerical";
+import OverallNumerical from "./Numerical/Overall/OverallNumerical";
 
-import ResultHeader from "./Header";
-import OverallGraphical from "./Graphical/Overall";
+import ResultHeader from "./Header/ResultHeader";
+import OverallGraphical from "./Graphical/Overall/OverallGraphical";
 import { getResult } from "./results.helper";
-import DownloadPDF from "./Download/PDF";
-import DownloadExcel from "./Download/Excel";
-const Results = () => {
-  const paramsWeightages = useSelector((state) => state.paramsWeightages);
+import DownloadPDF from "./Download/PDF/DownloadPDF";
+import DownloadExcel from "./Download/Excel/Excel";
+const Results = ({ paramsWeightages, LoggedInUserName }) => {
   const [detailedResult, setDetailedResult] = useState([]);
 
   const [showModal, setShowModal] = useState({
@@ -29,7 +26,6 @@ const Results = () => {
   });
   const [isPDFDownload, setIsPDFDownload] = useState(false);
   const [isEXCELDownload, setIsEXCELDownload] = useState(false);
-  const dispatch = useDispatch();
 
   useEffect(() => {
     const generateResult = async () => {
@@ -67,7 +63,7 @@ const Results = () => {
         setOptionValue(
           Array.from(Array(paramsWeightages.optionName.length).keys())
         );
-      } else if (paramsWeightages.noParams) {
+      } else {
         setShowModal((s) => ({
           ...s,
           text: "You have to select the parameters, weightage and score first to see the result.",
@@ -77,16 +73,6 @@ const Results = () => {
     generateResult();
     // eslint-disable-next-line
   }, [paramsWeightages]);
-
-  useEffect(() => {
-    if (!paramsWeightages.parameters.length > 0) {
-      dispatch(getParameters());
-    }
-  }, [
-    dispatch,
-    paramsWeightages.parameters,
-    paramsWeightages.parameters.length,
-  ]);
 
   if (showModal.text) {
     return <ModalParamsWeightage text={showModal.text} path={showModal.path} />;
@@ -116,7 +102,6 @@ const Results = () => {
         </div>
       </div>
     );
-  // console.log();
   return (
     <div className="admin-wrap AB-weightages mt-5">
       <div className="col-12">
@@ -198,6 +183,7 @@ const Results = () => {
       )}
       {isEXCELDownload && (
         <DownloadExcel
+          LoggedInUserName={LoggedInUserName}
           detailedResult={detailedResult
             .filter((data) => data.parametersType.length)
             .slice()}

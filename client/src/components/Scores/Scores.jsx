@@ -1,20 +1,18 @@
 import { useEffect, useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
 import { Button } from "reactstrap";
 
 import ModalParamsWeightage from "components/Shared/ModalParamsWeightage";
 import WeightagesNavbar from "components/Shared/ProgressBar";
-import ScoresElement from "./ScoresElement";
+import ScoresElement from "./ScoresElement/ScoresElement";
 
-import { addScores, getParameters } from "store/slices/paramWeightagesSlice";
-import { weightageArrayElement } from "components/Weightages/weightages.helper";
-import "./scores.component.css";
+import { addResult } from "store/slices/paramWeightagesSlice";
+
 import { setNotify } from "store/slices/notifySlice";
 import { scroller } from "react-scroll";
-import { useHistory } from "react-router";
+import { categoryArrayElement } from "utils/helper.function";
+import "./scores.component.css";
 
-const Scores = () => {
-  const paramsWeightages = useSelector((state) => state.paramsWeightages);
+const Scores = ({ paramsWeightages, dispatch, history }) => {
   const [showModal, setShowModal] = useState({
     text: "",
     path: "/parameters",
@@ -25,8 +23,6 @@ const Scores = () => {
   const [showSelectModal, setShowSelectModal] = useState([]);
   const [horizontalLine, setHorizontalLine] = useState("");
   const [textArea, setTextArea] = useState({});
-  const dispatch = useDispatch();
-  const history = useHistory();
 
   useEffect(() => {
     if (orginalParameters.length && fetchoptionName.length) {
@@ -74,7 +70,7 @@ const Scores = () => {
 
       if (!check || !paramsWeightages.optionName.length || !check2) {
         return setShowModal({
-          text: "You have to select the parameters and weightage first to select score.",
+          text: "You have to select the weightage first to select score.",
           path: "/weightages",
         });
       }
@@ -90,7 +86,7 @@ const Scores = () => {
       }
       setOrginalParameters(paramsWeightages.parameters.slice().sort(compare));
       setFetchOptionName(paramsWeightages.optionName);
-    } else if (paramsWeightages.noParams) {
+    } else {
       setShowModal({
         ...showModal,
         text: "You have to select the parameters and weightage first to select score.",
@@ -98,16 +94,6 @@ const Scores = () => {
     }
     // eslint-disable-next-line
   }, [paramsWeightages]);
-
-  useEffect(() => {
-    if (!paramsWeightages.parameters.length > 0) {
-      dispatch(getParameters());
-    }
-  }, [
-    dispatch,
-    paramsWeightages.parameters,
-    paramsWeightages.parameters.length,
-  ]);
 
   const handleChangeTextArea = (e) => {
     const { name, value } = e.target;
@@ -131,16 +117,6 @@ const Scores = () => {
     });
     setUpdateParameters(newParameters);
   };
-  // const handleCloseAllModal = () => {
-  //   const modal = orginalParameters.map((para) => ({
-  //     id: para._id,
-  //     modal: para.optionName.map(({ _id }) => ({
-  //       id: _id,
-  //       selectModal: false,
-  //     })),
-  //   }));
-  //   setShowSelectModal(modal);
-  // };
 
   const handleSubmit = () => {
     const unScore = updateParameters.map((para) => ({
@@ -150,11 +126,6 @@ const Scores = () => {
       ),
     }));
     setUpdateParameters(unScore);
-    // const checkError = unScore.filter((para) => {
-    //   const xyz = para.optionName.filter((opName) => opName.score === 0);
-    //   if (xyz.score === 0) return xyz;
-    //   console.log(xyz);
-    // });
     let checkError = unScore.map((para) => para.optionName);
     checkError = [].concat.apply([], checkError);
     checkError = checkError.filter((opName) => opName.score === 0);
@@ -169,7 +140,7 @@ const Scores = () => {
         duration: 700,
         delay: 100,
         smooth: true,
-        offset: -100,
+        offset: -300,
       });
     } else if (!checkError.length) {
       const scores = updateParameters.map((para) => ({
@@ -182,11 +153,30 @@ const Scores = () => {
         })),
       }));
       dispatch(
-        addScores({
-          scores,
+        addResult({
+          parameters: scores,
+          optionName: fetchoptionName,
           history,
         })
       );
+    }
+  };
+
+  const closeSelectModal = () => {
+    const checkModalOpen = [];
+
+    showSelectModal.map(({ modal }) => checkModalOpen.push(...modal));
+
+    if (checkModalOpen.find((o) => o.selectModal === true)) {
+      const closeSelectModal = showSelectModal.map((para) => ({
+        ...para,
+        modal: para.modal.map((paraModal) => ({
+          ...paraModal,
+          selectModal: false,
+        })),
+      }));
+
+      setShowSelectModal(closeSelectModal);
     }
   };
 
@@ -194,10 +184,7 @@ const Scores = () => {
     return <ModalParamsWeightage text={showModal.text} path={showModal.path} />;
   }
   return (
-    <div
-      // onClick={handleCloseAllModal}
-      className="admin-wrap AB-weightages mt-5"
-    >
+    <div onClick={closeSelectModal} className="admin-wrap AB-weightages mt-5">
       <div className="col-12">
         <h2 className="mb-5 font-weight-bold">
           Please score each option relative to the option
@@ -209,12 +196,12 @@ const Scores = () => {
           <WeightagesNavbar />
 
           <div className="mt-5">
-            {weightageArrayElement.map(
-              ({ weightageName }, i) =>
-                orginalParameters.find((o) => o.category === weightageName) && (
+            {categoryArrayElement.map(
+              ({ categoryName }, i) =>
+                orginalParameters.find((o) => o.category === categoryName) && (
                   <ScoresElement
                     key={i}
-                    weightageName={weightageName}
+                    categoryName={categoryName}
                     updateParameters={updateParameters}
                     horizontalLine={horizontalLine}
                     fetchoptionName={fetchoptionName}

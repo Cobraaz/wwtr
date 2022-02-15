@@ -1,35 +1,24 @@
 import ParameterNavbar from "components/Shared/ProgressBar";
-import Parameter from "./Parameter";
-import { useDispatch, useSelector } from "react-redux";
-import {
-  addParameters,
-  getParameters,
-} from "store/slices/paramWeightagesSlice";
+import Parameter from "./ShowParameter";
+import { addParameters } from "store/slices/paramWeightagesSlice";
 import { useEffect, useState } from "react";
-import "./Parameters.component.css";
-import { useHistory } from "react-router-dom";
 import { setNotify } from "store/slices/notifySlice";
+import "./Parameters.component.css";
 
-const Parameters = () => {
+const Parameters = ({ paramsWeightages, dispatch, history }) => {
   const [selectParameters, setSelectParameters] = useState([]);
-  const paramsWeightages = useSelector((state) => state.paramsWeightages);
-  const dispatch = useDispatch();
-  const history = useHistory();
 
   const submitParameters = () => {
     if (!selectParameters.length) {
       return dispatch(setNotify({ error: "Please select the parameters" }));
     }
+
     dispatch(addParameters({ parameters: selectParameters, history }));
   };
-
   useEffect(() => {
     setSelectParameters(paramsWeightages.parameters);
   }, [paramsWeightages.parameters]);
 
-  useEffect(() => {
-    dispatch(getParameters());
-  }, [dispatch]);
   return (
     <div className="admin-wrap AB-parameters mt-5">
       <div className="col-12">

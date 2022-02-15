@@ -1,14 +1,21 @@
 import { useEffect, useState } from "react";
 import { Element } from "react-scroll";
 import { Button } from "reactstrap";
-import { allParameters, parametersArrayElement } from "./Parameters.helper";
+import { allParameters } from "./Parameters.helper";
+import { categoryArrayElement } from "utils/helper.function";
 import ParametersElement from "./ParametersElement";
-const Parameter = ({
+import ResetModal from "./ResetModal/ResetModal";
+import { useHistory } from "react-router-dom";
+const ShowParameter = ({
   submitParameters,
   selectParameters,
   setSelectParameters,
 }) => {
   const [parametersArray, setParametersArray] = useState([]);
+  const [showResetModal, setShowResetModal] = useState(false);
+  const history = useHistory();
+  const toggleResetModal = () => setShowResetModal(!showResetModal);
+
   const toggleWarning = (warningdiv) => {
     if (document.getElementById(warningdiv).style.display === "none") {
       return (document.getElementById(warningdiv).style.display = "block");
@@ -49,25 +56,21 @@ const Parameter = ({
   if (!parametersArray.length) return null;
   return (
     <>
-      {parametersArrayElement.map(
-        (
-          { parameterName, parameterStart, parameterEnd },
-          i,
-          parametersArrayElement
-        ) => (
-          <ParametersElement
-            key={i}
-            parameterName={parameterName}
-            parameters={parametersArray.slice(parameterStart, parameterEnd)}
-            toggleWarning={toggleWarning}
-            handleClick={handleClick}
-            selectParameters={selectParameters}
-            horizontalLineShow={
-              parametersArrayElement.length - 1 === i ? false : true
-            }
-          />
-        )
-      )}
+      <ResetModal
+        history={history}
+        showResetModal={showResetModal}
+        toggleResetModal={toggleResetModal}
+      />
+      {categoryArrayElement.map(({ categoryName }, i) => (
+        <ParametersElement
+          key={i}
+          categoryName={categoryName}
+          parameters={parametersArray}
+          toggleWarning={toggleWarning}
+          handleClick={handleClick}
+          selectParameters={selectParameters}
+        />
+      ))}
       <Element style={{ display: "flex", flexDirection: "column" }}>
         <div
           className="AB-container col-10 pb-5"
@@ -76,9 +79,17 @@ const Parameter = ({
           <Button
             onClick={submitParameters}
             color="info"
-            className="float-right AB-submit-button"
+            className="float-right AB-submit-button ml-5"
           >
             Submit
+          </Button>
+          <Button
+            onClick={toggleResetModal}
+            color="warning"
+            style={{ fontWeight: "bold" }}
+            className="float-right"
+          >
+            Reset
           </Button>
         </div>
       </Element>
@@ -86,4 +97,4 @@ const Parameter = ({
   );
 };
 
-export default Parameter;
+export default ShowParameter;

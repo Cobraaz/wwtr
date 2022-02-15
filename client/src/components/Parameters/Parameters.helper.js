@@ -227,18 +227,6 @@ export const parametersArray = [
   },
 ];
 
-export const parametersArrayElement = [
-  { parameterName: "permit consideration", parameterStart: 0, parameterEnd: 2 },
-  { parameterName: "design", parameterStart: 2, parameterEnd: 15 },
-  { parameterName: "implementation", parameterStart: 15, parameterEnd: 21 },
-  { parameterName: "operation", parameterStart: 21, parameterEnd: 29 },
-  {
-    parameterName: "community",
-    parameterStart: 29,
-    parameterEnd: parametersArray.length,
-  },
-];
-
 export const allParameters = async () => {
   try {
     const res = await getData("parameters/all_parameters");

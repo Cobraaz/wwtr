@@ -58,6 +58,7 @@ export const getResult = async (paramsWeightages) => {
       function sum(array, key) {
         return array.reduce((a, b) => a + (b[key] || 0), 0);
       }
+
       if (parametersOptionTemp2.length)
         parametersOptionTemp1.push({
           name: initialOptionName[j],
@@ -110,26 +111,31 @@ export const getResult = async (paramsWeightages) => {
   let result = [
     {
       name: "Permitting",
+      category: "permit consideration",
       parametersType: parametersType[0],
       detailedData: optionName[0],
     },
     {
       name: "Design",
+      category: "design",
       parametersType: parametersType[1],
       detailedData: optionName[1],
     },
     {
       name: "Implementation",
+      category: "implementation",
       parametersType: parametersType[2],
       detailedData: optionName[2],
     },
     {
       name: "Operation",
+      category: "operation",
       parametersType: parametersType[3],
       detailedData: optionName[3],
     },
     {
       name: "Community",
+      category: "community",
       parametersType: parametersType[4],
       detailedData: optionName[4],
     },

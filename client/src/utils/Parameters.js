@@ -1,4 +1,4 @@
-export const parametersArray = [
+export const OriginalParametersArray = [
   {
     warning:
       "Score based on the requirements for permitting the new effluent discharge.",

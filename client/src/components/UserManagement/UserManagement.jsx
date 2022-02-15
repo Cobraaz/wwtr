@@ -1,10 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import { usePagination, useTable } from "react-table";
 import { Input } from "reactstrap";
-import "./UserManagement.components.css";
-
-import { useDispatch } from "react-redux";
-import { useSelector } from "react-redux";
 import Modal from "components/Shared/Modal";
 import { capitalize, formatDate } from "utils/helper.function";
 
@@ -27,11 +23,9 @@ import {
   updateUserRole,
 } from "store/slices/authSlice";
 import { addModal } from "store/slices/modalSlice";
+import "./UserManagement.components.css";
 
-const Admin = () => {
-  const dispatch = useDispatch();
-  const auth = useSelector((state) => state.auth);
-  const users = useSelector((state) => state.auth.users);
+const UserManagement = ({ auth, users, dispatch }) => {
   const [initialUser, setInitialUser] = useState([]);
   const [allUser, setAllUser] = useState([]);
   const [filterUser, setFilterUser] = useState([]);
@@ -104,7 +98,6 @@ const Admin = () => {
   useEffect(() => {
     let resultUsers = [];
     if (initialUser && initialUser.length > 0) {
-      console.log(users.filter(({ role }) => role === "admin").length);
       resultUsers = initialUser.map((user, index, initialUser) => {
         return {
           select: index + 1,
@@ -398,4 +391,4 @@ const Admin = () => {
   );
 };
 
-export default Admin;
+export default UserManagement;

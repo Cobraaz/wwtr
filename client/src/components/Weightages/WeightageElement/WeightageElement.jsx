@@ -4,7 +4,7 @@ import SelectModal from "./SelectModal";
 
 const WeightageElement = ({
   updateParameters,
-  weightageName,
+  categoryName,
   horizontalLine,
   availablities,
   handleSelect,
@@ -47,7 +47,7 @@ const WeightageElement = ({
 
   return (
     <>
-      <Element name={weightageName}>
+      <Element name={categoryName}>
         <div className="row">
           <div className="col-6">
             <label className="pl-4 ml-4">Parameters</label>
@@ -61,15 +61,14 @@ const WeightageElement = ({
         </div>
         {updateParameters.map((parameter, i) => {
           if (
-            parameter.category.toLowerCase() === weightageName.toLowerCase() &&
+            parameter.category.toLowerCase() === categoryName.toLowerCase() &&
             parameter.type === horizontalLine
           ) {
             horizontalLineShow = false;
           }
 
           return (
-            parameter.category.toLowerCase() ===
-              weightageName.toLowerCase() && (
+            parameter.category.toLowerCase() === categoryName.toLowerCase() && (
               <div key={i} className="AB-weightage-parent">
                 <div className="AB-parameters-parent">
                   <i
@@ -98,7 +97,7 @@ const WeightageElement = ({
                   </div>
                 </div>
                 <Element
-                  name={parameter._id}
+                  name={parameter._id.toString()}
                   style={{
                     borderColor: `${parameter.error ? "red" : "#e0e7ff"}`,
                   }}

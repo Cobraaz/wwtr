@@ -1,4 +1,5 @@
 import Cookies from "js-cookie";
+import jwt_decode from "jwt-decode";
 import { deleteData, getData, patchData, postData } from "utils/fetchData";
 import { setAlert } from "./alertSlice";
 import { removeLoader, setLoader } from "./loaderSlice";
@@ -10,7 +11,6 @@ export const registerUser = createAsyncThunk(
   "user/registerUser",
   async ({ userData, clearInput }, { dispatch, rejectWithValue }) => {
     try {
-      console.log(userData);
       dispatch(setLoader());
       const res = await postData("users/signup", userData);
       dispatch(removeLoader());
@@ -54,20 +54,35 @@ export const loginUser = createAsyncThunk(
     }
   }
 );
-export const loadUser = createAsyncThunk("user/loadUser", async () => {
-  const refreshToken = Cookies.get("refreshtoken") || "";
-  if (refreshToken) {
-    const res = await getData("users/access_token", refreshToken);
-    if (res.err) {
+export const loadUser = createAsyncThunk(
+  "user/loadUser",
+  async (_, { rejectWithValue }) => {
+    const refreshToken = Cookies.get("refreshtoken") || "";
+
+    if (refreshToken) {
+      const decodedToken = jwt_decode(refreshToken);
+      if (decodedToken.exp * 1000 < Date.now()) {
+        Cookies.remove("refreshtoken");
+        localStorage.removeItem("firstLogin");
+        return rejectWithValue();
+      }
+      const res = await getData("users/access_token", refreshToken);
+      if (res.err) {
+        Cookies.remove("refreshtoken");
+        localStorage.removeItem("firstLogin");
+        return rejectWithValue();
+      }
+      return {
+        token: res.access_token,
+        user: res.user,
+      };
+    } else {
       Cookies.remove("refreshtoken");
-      return localStorage.removeItem("firstLogin");
+      localStorage.removeItem("firstLogin");
+      return rejectWithValue();
     }
-    return {
-      token: res.access_token,
-      user: res.user,
-    };
   }
-});
+);
 
 export const activateUserEmail = createAsyncThunk(
   "user/activateUserEmail",
@@ -211,10 +226,6 @@ export const updateUserRole = createAsyncThunk(
       }
 
       dispatch(setNotify({ success: res.msg }));
-      console.log(loggedInUserId);
-      console.log(
-        initialUser.filter(({ _id: usersId }) => usersId === loggedInUserId)
-      );
 
       const updatingLoggedInUser = initialUser.filter(
         ({ _id: usersId }) => usersId === loggedInUserId

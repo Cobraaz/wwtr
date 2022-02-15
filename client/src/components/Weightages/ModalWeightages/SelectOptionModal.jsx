@@ -25,9 +25,9 @@ const SelectOptionModal = ({
   initialName,
 }) => {
   const [optionValue] = useState(Object.keys(initialName));
-  const [optionName, setoptionName] = useState(initialName);
+  const [optionName, setoptionName] = useState();
   const [isDropDown, setIsDropDown] = useState(false);
-
+  // console.log(optionName, initialName, "optionName");
   const handleChangeInput = (e) => {
     const { name, value } = e.target;
     if (value.endsWith(" ") || value.startsWith(" ") || !value)
@@ -48,7 +48,7 @@ const SelectOptionModal = ({
     };
 
     for (var i = 0; i < setOption.length; i++) {
-      initialState[optionValue[i]] = optionName[optionValue[i]];
+      initialState[optionValue[i]] = initialName[optionValue[i]];
     }
     setoptionName(initialState);
     // eslint-disable-next-line

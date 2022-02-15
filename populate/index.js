@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 import fakeDB from "./FakeDB.js";
-import config from "../config/keys.js";
+import config from "../config/keys.cjs";
 
 const MONGODB_URL = config.MONGODB_URL;
 

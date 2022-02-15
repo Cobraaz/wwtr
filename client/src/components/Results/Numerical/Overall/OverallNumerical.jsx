@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Table } from "reactstrap";
 import styles from "../Detailed/detailed.numerical.module.css";
-import OverallNumericalElement from "./OverallNumericalElement";
+import OverallNumericalElement from "./OverallNumericalElement/OverallNumericalElement";
 
 const OverallNumerical = ({
   overviewNumerical,

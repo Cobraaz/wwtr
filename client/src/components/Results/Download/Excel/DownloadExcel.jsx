@@ -1,21 +1,164 @@
 import ReactExport from "react-data-export";
-import { useSelector } from "react-redux";
+import { categoryArrayElement } from "utils/helper.function";
 
 const ExcelFile = ReactExport.ExcelFile;
 const ExcelSheet = ReactExport.ExcelFile.ExcelSheet;
 
 const DownloadExcel = ({
-  detailedResult,
-  overviewNumerical,
-  element,
-  optionName: oldOptionName,
-  viewValue,
-  setIsEXCELDownload,
-  optionValue,
+  props: {
+    detailedResult,
+    overviewNumerical,
+    element,
+    optionName: oldOptionName,
+    viewValue,
+    setIsEXCELDownload,
+    optionValue,
+    LoggedInUserName,
+  },
+  parametersArray,
 }) => {
-  const LoggedInUserName = useSelector((state) => state.auth.user.name);
+  function load() {
+    const responseAllParameters = parametersArray.map((parameter, i) => ({
+      ...parameter,
+      index: i,
+    }));
+    const getSelectedParameterWithName = detailedResult.map((dRes) => ({
+      name: dRes.name,
+      category: dRes.category,
+      parametersType: dRes.parametersType,
+    }));
+    const UpdatedAllParameters = [];
+    categoryArrayElement.map(({ categoryName }) => {
+      const dummy2 = [];
+      for (let j = 0; j < responseAllParameters.length; j++) {
+        if (categoryName === responseAllParameters[j].category)
+          dummy2.push(responseAllParameters[j].type);
+      }
+      UpdatedAllParameters.push({
+        category: categoryName,
+        parametersType: dummy2,
+      });
+      return null;
+    });
+
+    const dummy = [];
+
+    categoryArrayElement.map(({ categoryName }, i) => {
+      if (
+        getSelectedParameterWithName.find((o) => o.category === categoryName)
+      ) {
+        return dummy.push(
+          ...getSelectedParameterWithName.filter(
+            (o) => o.category === categoryName
+          )
+        );
+      }
+      return dummy.push({
+        category: categoryName,
+        parametersType: [],
+      });
+    });
+
+    getSelectedParameterWithName.splice(0, getSelectedParameterWithName.length);
+
+    getSelectedParameterWithName.push(...dummy);
+
+    const result = categoryArrayElement.map((_, i) => {
+      let difference = UpdatedAllParameters[i].parametersType.filter(
+        (x) => !getSelectedParameterWithName[i].parametersType.includes(x)
+      );
+
+      return {
+        category: UpdatedAllParameters[i].category,
+        parametersType: difference,
+      };
+    });
+    // result difference
+    // UpdatedAllParameters saare hai isme
+
+    const xyzResult = categoryArrayElement.map(({ categoryName, name }, i) => {
+      if (
+        getSelectedParameterWithName.find((o) => o.category === categoryName)
+          .parametersType.length > 0
+      ) {
+        if (result[i].parametersType.length > 0) {
+          const findDetailedResult = detailedResult.find(
+            ({ category }) => category === categoryName
+          );
+          const updatedDetailedResultValue =
+            findDetailedResult.detailedData.optionName.map((opName) => {
+              return {
+                ...opName,
+                parameters: UpdatedAllParameters[i].parametersType.map(
+                  (paraType) => {
+                    const findParameter = opName.parameters.find(
+                      (e) => paraType === e.type
+                    );
+                    if (findParameter && findParameter.type) {
+                      return findParameter;
+                    } else {
+                      return {
+                        score: 0,
+                        weight: 0,
+                        weightedScore: 0,
+                        type: paraType,
+                        opName: opName.name,
+                      };
+                    }
+                  }
+                ),
+              };
+            });
+
+          return {
+            ...findDetailedResult,
+            detailedData: {
+              ...findDetailedResult.detailedData,
+              optionName: updatedDetailedResultValue,
+            },
+          };
+        } else {
+          return detailedResult[i];
+        }
+      } else {
+        return {
+          name,
+          category: categoryName,
+          parametersType: result[i].parametersType,
+          detailedData: {
+            name: categoryName,
+            optionName: oldOptionName.map((opName) => ({
+              name: opName,
+              parameters: result[i].parametersType.map((paraName) => ({
+                score: 0,
+                weight: 0,
+                weightedScore: 0,
+                type: paraName,
+                opName: opName,
+              })),
+              totalScore: {
+                score: 0,
+                weightedScore: 0,
+              },
+              avgScore: {
+                score: 0,
+                weightedScore: 0,
+              },
+              comparisonScore: {
+                score: 0,
+                weightedScore: 0,
+              },
+            })),
+          },
+        };
+      }
+    });
+
+    return xyzResult.filter((item) => item);
+  }
+
   const multiDataSetDetailed = () => {
-    const oldModifiedDetailedResult = detailedResult
+    const oldModifiedDetailedResult = load()
       .map(({ parametersType, name, detailedData }) => ({
         name,
         parametersType,
@@ -155,7 +298,7 @@ const DownloadExcel = ({
               if (index === 0) {
                 if (opName2.type) {
                   pushData.push({
-                    value: optionNameIndex,
+                    value: optionNameIndex + 1,
                     style: {
                       alignment: {
                         wrapText: true,
@@ -309,7 +452,7 @@ const DownloadExcel = ({
                 });
               }
 
-              if (opName2.weight) {
+              if (opName2.weight || opName2.weight === 0) {
                 pushData.push({
                   value: opName2.weight,
                   style: {
@@ -714,9 +857,38 @@ const DownloadExcel = ({
     return updatedResult;
   };
   const multiDataSetOverall = () => {
-    const oldModifiedOverviewResult = overviewNumerical.overallResult
+    const copyCategoryArrayElement = categoryArrayElement.slice();
+    copyCategoryArrayElement.push({
+      categoryName: "overall option score",
+      name: "Overall Option Score",
+    });
+
+    const updatingOverviewNumerical = overviewNumerical.overallResult.map(
+      (overviewNumericalResult) => {
+        return {
+          name: overviewNumericalResult.name ?? "",
+          result: copyCategoryArrayElement.map(({ name }) => {
+            const findParameter = overviewNumericalResult.result.find(
+              (e) => e.type === name
+            );
+            if (findParameter) {
+              return findParameter;
+            } else {
+              return {
+                score: 0,
+                weightedScore: 0,
+                type: name,
+              };
+            }
+          }),
+        };
+      }
+    );
+
+    const oldModifiedOverviewResult = updatingOverviewNumerical
       .map((overRes, index) => optionValue.includes(index) && overRes.result)
       .filter((filtering) => filtering && filtering.length);
+
     const updatedDetailedResult = [];
     for (let i = 0; i < oldModifiedOverviewResult[0].length; i++) {
       const nestedOption2 = [];

@@ -1,9 +1,11 @@
 import NavBarNew from "components/Navbar/NavBar";
 import Footer from "components/Shared/Footer";
 import { useLocation } from "react-router-dom";
+import CustomHeader from "./CustomHeader";
 
 const Layout = ({ children }) => {
   const location = useLocation();
+
   const showNavbar = () => {
     if (location.pathname === "/") {
       return <NavBarNew />;
@@ -18,6 +20,8 @@ const Layout = ({ children }) => {
   };
   return (
     <>
+      {location.pathname && <CustomHeader pathname={location.pathname} />}
+      <CustomHeader pathname={location.pathname} />
       <div className="container-fluid wrapper flex-shrink-0 app landing-page">
         <div className="row">
           {showNavbar()}

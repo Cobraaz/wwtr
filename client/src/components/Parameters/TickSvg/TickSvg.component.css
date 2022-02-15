@@ -13,10 +13,10 @@
   width: 30px; /* ORIGINALLY 56px */
   height: 30px; /* ORIGINALLY 56px */
   border-radius: 50%;
-  border: 2px solid white;
+  border: 2px solid white !important;
   display: block;
   stroke-width: 7;
-  stroke: #fff;
+  stroke: #fff !important;
   stroke-miterlimit: 10;
   /* margin: 1% auto; */
   box-shadow: inset 0px 0px 0px #03a9f4;

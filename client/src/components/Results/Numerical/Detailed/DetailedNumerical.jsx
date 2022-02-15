@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Element } from "react-scroll";
 import { Table } from "reactstrap";
 import styles from "./detailed.numerical.module.css";
-import DetailedNumericalElement from "./DetailedNumericalElement";
+import DetailedNumericalElement from "./DetailedNumericalElement/DetailedNumericalElement";
 
 const DetailedNumerical = ({
   result: { parametersType, name, detailedData },

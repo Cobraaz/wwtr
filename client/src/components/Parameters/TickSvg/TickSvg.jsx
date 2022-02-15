@@ -1,4 +1,4 @@
-import "./TickSvg.component.css";
+import "./tickSvg.component.css";
 
 const TickSvg = () => {
   return (

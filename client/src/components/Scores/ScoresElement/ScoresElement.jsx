@@ -1,9 +1,9 @@
 import { Element } from "react-scroll";
 import "./ScoresElement.component.css";
-import ScoresModal from "./ScoresModal";
+import ScoresModal from "./ScoresModal/ScoresModal";
 
 const ScoresElement = ({
-  weightageName,
+  categoryName,
   updateParameters,
   horizontalLine,
   fetchoptionName,
@@ -58,7 +58,7 @@ const ScoresElement = ({
 
   return (
     <>
-      <Element name={weightageName}>
+      <Element name={categoryName}>
         <div className="AB-weightage-parent-element">
           <div className="AB-parameters-parent">
             <label
@@ -82,15 +82,14 @@ const ScoresElement = ({
         </div>
         {updateParameters.map((parameter, i) => {
           if (
-            parameter.category.toLowerCase() === weightageName.toLowerCase() &&
+            parameter.category.toLowerCase() === categoryName.toLowerCase() &&
             parameter.type === horizontalLine
           ) {
             horizontalLineShow = false;
           }
 
           return (
-            parameter.category.toLowerCase() ===
-              weightageName.toLowerCase() && (
+            parameter.category.toLowerCase() === categoryName.toLowerCase() && (
               <div key={parameter._id} className="AB-weightage-parent">
                 <div className="AB-parameters-parent">
                   <i

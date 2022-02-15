@@ -3,29 +3,31 @@ import RegisterUser from "../Authentication/RegisterUser";
 
 import ActivateEmail from "components/Authentication/ActivateEmail";
 import ResetPassword from "components/Authentication/ResetPassword";
-import UserManagement from "components/UserManagement";
 import AdminRoute from "./AdminRoute";
-import Parameters from "components/Parameters";
 import PrivateRoute from "./PrivateRoute";
-import Weightages from "components/Weightages";
-import Scores from "components/Scores";
-import Results from "components/Results";
 import NotFound from "../layout/NotFound";
+import ResultPage from "pages/ResultPage";
+import UserManagementPage from "pages/UserManagementPage";
+import ParametersPage from "pages/ParametersPage";
+import ScoresPage from "pages/ScoresPage";
+import WeightagesPage from "pages/WeightagesPage";
+import HistoryPage from "pages/HistoryPage";
 
 const Routes = () => {
   return (
     <section>
       <Switch>
-        <PrivateRoute exact path="/parameters" component={Parameters} />
-        <PrivateRoute exact path="/weightages" component={Weightages} />
-        <PrivateRoute exact path="/scores" component={Scores} />
-        <PrivateRoute exact path="/results" component={Results} />
+        <PrivateRoute exact path="/parameters" component={ParametersPage} />
+        <PrivateRoute exact path="/weightages" component={WeightagesPage} />
+        <PrivateRoute exact path="/scores" component={ScoresPage} />
+        <PrivateRoute exact path="/results" component={ResultPage} />
+        <PrivateRoute exact path="/history" component={HistoryPage} />
         <Route exact path="/authentication/:auth" component={RegisterUser} />
         <Route exact path="/user/reset/:token" component={ResetPassword} />
         <AdminRoute
           exact
           path="/user_management/admin"
-          component={UserManagement}
+          component={UserManagementPage}
         />
         <Route
           exact

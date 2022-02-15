@@ -26,6 +26,7 @@ const NavBarNew = ({ bgcolor = "" }) => {
   const dispatch = useDispatch();
   const auth = useSelector((state) => state.auth);
   const location = useLocation();
+  const toggle = () => setIsOpen(!isOpen);
 
   useEffect(() => {
     setIsAuthenticated(auth && auth.user && auth.user.email ? true : false);
@@ -62,7 +63,6 @@ const NavBarNew = ({ bgcolor = "" }) => {
     </NavItem>
   );
 
-  const toggle = () => setIsOpen(!isOpen);
   return (
     <ReactResizeDetector handleWidth>
       {({ width }) => (
@@ -152,17 +152,22 @@ const NavBarNew = ({ bgcolor = "" }) => {
                       </span>
                     </DropdownToggle>
                     <DropdownMenu>
-                      <DropdownItem
-                        disabled
-                        style={{
-                          color: "#009dc4",
-                          fontWeight: "bold",
-                          letterSpacing: "0.8px",
-                          fontSize: "18px",
-                        }}
+                      <Link
+                        to={auth.user.name ? "/history" : "#"}
+                        onClick={() => setIsDropDown(!isDropDown)}
                       >
-                        History
-                      </DropdownItem>
+                        <DropdownItem
+                          disabled={auth.user.name ? true : false}
+                          style={{
+                            color: "#009dc4",
+                            fontWeight: "bold",
+                            letterSpacing: "0.8px",
+                            fontSize: "18px",
+                          }}
+                        >
+                          History
+                        </DropdownItem>
+                      </Link>
                       <DropdownItem divider />
                       <DropdownItem
                         onClick={handleLogout}

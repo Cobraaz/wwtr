@@ -1,29 +1,17 @@
 import ModalParamsWeightage from "components/Shared/ModalParamsWeightage";
 import WeightagesNavbar from "components/Shared/ProgressBar";
 import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import { Button } from "reactstrap";
-import {
-  addWeightages,
-  getParameters,
-} from "store/slices/paramWeightagesSlice";
-import WeightageElement from "./WeightageElement";
-import "./Weightages.component.css";
+import { addWeightages } from "store/slices/paramWeightagesSlice";
+import WeightageElement from "./WeightageElement/WeightageElement";
 import { scroller } from "react-scroll";
 import { setNotify } from "store/slices/notifySlice";
-import { useHistory } from "react-router-dom";
-import ModalWeightages from "./ModalWeightages";
-import { weightageArrayElement } from "./weightages.helper";
+import ModalWeightages from "./ModalWeightages/ModalWeightages";
+import { categoryArrayElement } from "utils/helper.function";
+import "./Weightages.component.css";
 
-const Weightages = () => {
-  const paramsWeightages = useSelector((state) => state.paramsWeightages);
-  const [showModal, setShowModal] = useState("");
-  const [orginalParameters, setOrginalParameters] = useState([]);
-  const [updateParameters, setUpdateParameters] = useState([]);
-  const [showSelectModal, setShowSelectModal] = useState([]);
-  const [horizontalLine, setHorizontalLine] = useState("");
-  const [textArea, setTextArea] = useState();
-  const [availablities, setAvailablities] = useState([
+const Weightages = ({ paramsWeightages, dispatch, history }) => {
+  const initialStateAvailablities = [
     Infinity, //NA
     Infinity, //NA
     Infinity, //NA
@@ -34,14 +22,20 @@ const Weightages = () => {
     3, //8
     2, //9
     1, //10
-  ]);
+  ];
+
+  const [showModal, setShowModal] = useState("");
+  const [orginalParameters, setOrginalParameters] = useState([]);
+  const [updateParameters, setUpdateParameters] = useState([]);
+  const [showSelectModal, setShowSelectModal] = useState([]);
+  const [horizontalLine, setHorizontalLine] = useState("");
+  const [textArea, setTextArea] = useState();
+  const [availablities, setAvailablities] = useState();
   const [showSelectOptionModal, setShowSelectOptionModal] = useState(false);
   const toggleSelectOptionModal = () =>
     setShowSelectOptionModal(!showSelectOptionModal);
 
   const [optionName, setOptionName] = useState([]);
-  const dispatch = useDispatch();
-  const history = useHistory();
 
   useEffect(() => {
     if (paramsWeightages.parameters.length) {
@@ -58,8 +52,10 @@ const Weightages = () => {
       if (paramsWeightages.optionName.length) {
         setOptionName(paramsWeightages.optionName);
       }
-    } else if (paramsWeightages.noParams) {
-      setShowModal(paramsWeightages.noParams);
+    } else {
+      setShowModal(
+        "You have to select the parameters first to select weightage."
+      );
     }
   }, [paramsWeightages]);
 
@@ -71,7 +67,10 @@ const Weightages = () => {
         orginalParameters.map((para) => ({ ...para, error: false }))
       );
       setShowSelectModal(
-        orginalParameters.map((para) => ({ id: para._id, selectModal: false }))
+        orginalParameters.map((para) => ({
+          id: para._id,
+          selectModal: false,
+        }))
       );
 
       setTextArea(
@@ -83,7 +82,7 @@ const Weightages = () => {
           }, {})
       );
       const oldAvailabilities = orginalParameters.map((para) => para.weightage);
-      const updatingAvailabilites = availablities.slice();
+      const updatingAvailabilites = initialStateAvailablities.slice();
       oldAvailabilities.forEach(
         (o1) =>
           (updatingAvailabilites[o1 - 1] = updatingAvailabilites[o1 - 1] - 1)
@@ -93,15 +92,15 @@ const Weightages = () => {
     // eslint-disable-next-line
   }, [orginalParameters]);
 
-  useEffect(() => {
-    if (!paramsWeightages.parameters.length > 0) {
-      dispatch(getParameters());
-    }
-  }, [
-    dispatch,
-    paramsWeightages.parameters,
-    paramsWeightages.parameters.length,
-  ]);
+  // useEffect(() => {
+  //   if (!paramsWeightages.parameters.length > 0) {
+  //     dispatch(getParameters());
+  //   }
+  // }, [
+  //   dispatch,
+  //   paramsWeightages.parameters,
+  //   paramsWeightages.parameters.length,
+  // ]);
 
   const handleSelect = (key, parameterId) => {
     if (availablities[key - 1] > 0) {
@@ -156,28 +155,46 @@ const Weightages = () => {
         delay: 100,
         smooth: true,
 
-        offset: -100,
+        offset: -300,
       });
     } else if (!checkError.length) {
-      const weightages = updateParameters.map((para) => ({
+      let weightages = updateParameters.map((para) => ({
         ...para,
         comment: textArea[para._id],
       }));
+      weightages = weightages.map((para) => {
+        delete para.error;
+        return para;
+      });
 
-      dispatch(addWeightages({ weightages, setShowSelectOptionModal }));
+      dispatch(
+        addWeightages({ parameters: weightages, setShowSelectOptionModal })
+      );
+    }
+  };
+  const closeSelectModal = () => {
+    if (showSelectModal.find((o) => o.selectModal === true)) {
+      const closeSelectModal = showSelectModal.map((para) => ({
+        ...para,
+        selectModal: false,
+      }));
+      setShowSelectModal(closeSelectModal);
     }
   };
 
   if (showModal)
     return <ModalParamsWeightage text={showModal} path="/parameters" />;
   return (
-    <div className="admin-wrap AB-weightages mt-5">
-      <ModalWeightages
-        showSelectOptionModal={showSelectOptionModal}
-        toggleSelectOptionModal={toggleSelectOptionModal}
-        history={history}
-        optionName={optionName}
-      />
+    <div className="admin-wrap AB-weightages mt-5" onClick={closeSelectModal}>
+      {showSelectOptionModal && (
+        <ModalWeightages
+          showSelectOptionModal={showSelectOptionModal}
+          toggleSelectOptionModal={toggleSelectOptionModal}
+          history={history}
+          optionName={optionName}
+          parameters={paramsWeightages.parameters}
+        />
+      )}
       <div className="col-12">
         <h2 className="mb-5 font-weight-bold">
           Please select the weightage for selected parameters
@@ -188,13 +205,13 @@ const Weightages = () => {
         >
           <WeightagesNavbar />
           <div className="mt-5">
-            {weightageArrayElement.map(
-              ({ weightageName }, i) =>
-                orginalParameters.find((o) => o.category === weightageName) && (
+            {categoryArrayElement.map(
+              ({ categoryName }, i) =>
+                orginalParameters.find((o) => o.category === categoryName) && (
                   <WeightageElement
                     key={i}
                     updateParameters={updateParameters}
-                    weightageName={weightageName}
+                    categoryName={categoryName}
                     horizontalLine={horizontalLine}
                     availablities={availablities}
                     handleSelect={handleSelect}

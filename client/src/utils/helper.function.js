@@ -15,3 +15,12 @@ export const capitalize = (input) => {
   });
   return CapitalizedWords.join(" ");
 };
+
+// * Category For Array Element
+export const categoryArrayElement = [
+  { categoryName: "permit consideration", name: "Permitting" },
+  { categoryName: "design", name: "Design" },
+  { categoryName: "implementation", name: "Implementation" },
+  { categoryName: "operation", name: "Operation" },
+  { categoryName: "community", name: "Community" },
+];
